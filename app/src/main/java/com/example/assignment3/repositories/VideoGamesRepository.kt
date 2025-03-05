@@ -32,7 +32,7 @@ object VideoGamesRepository {
     }
 
     fun updateVideoGame(
-        id: Int,
+        id: Long,
         title: String,
         developer: String,
         genre: String,

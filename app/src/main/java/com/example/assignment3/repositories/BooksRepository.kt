@@ -30,7 +30,7 @@ object BooksRepository {
         _Book.value += newBook
     }
     fun updateBook(
-        id: Int,
+        id: Long,
         title: String,
         author: String,
         format: String,

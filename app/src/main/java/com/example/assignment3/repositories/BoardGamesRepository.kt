@@ -29,7 +29,7 @@ object BoardGamesRepository {
     }
 
     fun updateBoardGame(
-        id: Int,
+        id: Long,
         title: String,
         minPlayers: Int,
         maxPlayers: Int,

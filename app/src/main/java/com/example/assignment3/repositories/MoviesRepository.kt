@@ -31,7 +31,7 @@ object MoviesRepository {
     }
 
     fun updateMovie(
-        id: Int,
+        id: Long,
         title: String,
         genre: String,
         rating: String,

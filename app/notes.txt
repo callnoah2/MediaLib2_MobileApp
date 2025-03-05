@@ -1,0 +1,5 @@
+Added MediaLibApplication to the project. Prof already had it there, perhaps I should have had it already
+Is it for the entire project or just the one of the views?
+in his VeiwModel, notesRepository was lowercase, but his actual repository was uppercase.
+in my viewmodel, the BoardGamesRepository us uppercase and it was like that already for the init that was already being used
+Errors for getting/using IDs, so... fix that I guess.

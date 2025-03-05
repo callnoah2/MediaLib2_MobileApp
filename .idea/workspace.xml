@@ -10,10 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4956754-4229-4071-9864-c4d7baf2396c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/MediaLibApplication.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/screens/BoardGames/BoardGameScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/screens/BoardGames/BoardGameScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/viewModels/BoardGameViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/viewModels/BoardGameViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/notes.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

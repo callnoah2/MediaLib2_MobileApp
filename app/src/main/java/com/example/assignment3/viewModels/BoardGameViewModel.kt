@@ -8,7 +8,9 @@ import com.example.assignment3.models.BoardGame
 import com.example.assignment3.repositories.BoardGamesRepository
 import kotlinx.coroutines.launch
 
-class BoardGameViewModel : ViewModel() {
+class BoardGameViewModel(
+    private val BoardGamesRepository: BoardGamesRepository
+): ViewModel() {
     private val _boardGames = MutableStateFlow(emptyList<BoardGame>())
     val boardGames: StateFlow<List<BoardGame>> = _boardGames
 

@@ -7,7 +7,7 @@ import androidx.room.Update
 import com.example.assignment3.models.Movie
 
 @Dao
-abstract class Movie {
+abstract class MoviesDao {
     @Query("SELECT * FROM Movie")
     abstract suspend fun getAllMovies(): List<Movie>
 

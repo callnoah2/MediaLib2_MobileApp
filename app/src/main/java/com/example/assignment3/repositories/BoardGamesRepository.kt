@@ -58,4 +58,6 @@ class BoardGamesRepository(
 //            }
 //        }
 //    }
+    companion object {
+    }
 }

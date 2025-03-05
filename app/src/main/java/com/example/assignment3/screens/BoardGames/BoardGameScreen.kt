@@ -20,6 +20,10 @@ import com.example.assignment3.viewModels.BoardGameViewModel
 fun BoardGameScreen(navController: NavController, viewModel: BoardGameViewModel = viewModel()) {
     val boardGames by viewModel.boardGames.collectAsState()
 
+    LaunchedEffect(Unit) {
+        viewModel.getAllBoardGames()
+    }
+
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         Text(text = "Board Games", style = MaterialTheme.typography.headlineLarge, modifier = Modifier.padding(bottom = 16.dp))
 

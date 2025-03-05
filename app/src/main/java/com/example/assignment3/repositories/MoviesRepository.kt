@@ -1,15 +1,21 @@
 package com.example.assignment3.repositories
 
+import com.example.assignment3.daos.MoviesDao
 import com.example.assignment3.models.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-object MoviesRepository {
-    var movieId = 0
+class MoviesRepository(
+    private val moviesDao: MoviesDao
+) {
     private val _Movies = MutableStateFlow(emptyList<Movie>())
     val Movies: StateFlow<List<Movie>> = _Movies
 
-    fun addMovie(
+    suspend fun getAllMovies() {
+        _Movies.value = moviesDao.getAllMovies()
+    }
+
+    suspend fun addMovie(
         title: String,
         genre: String,
         rating: String,
@@ -18,7 +24,6 @@ object MoviesRepository {
         notes: String
     ) {
         val newMovie = Movie(
-            id = ++movieId,
             title = title,
             genre = genre,
             rating = rating,
@@ -26,35 +31,35 @@ object MoviesRepository {
             format = format,
             notes = notes
         )
-
+        newMovie.id = moviesDao.insertMovie(newMovie)
         _Movies.value += newMovie
     }
 
-    fun updateMovie(
-        id: Long,
-        title: String,
-        genre: String,
-        rating: String,
-        runtime: Int,
-        format: String,
-        notes: String
-    ) {
-        val updatedMovie = Movie(
-            id = id,
-            title = title,
-            genre = genre,
-            rating = rating,
-            runtime = runtime,
-            format = format,
-            notes = notes
-        )
-
-        _Movies.value = _Movies.value.map { movie ->
-            if (movie.id == id) {
-                updatedMovie
-            } else {
-                movie
-            }
-        }
-    }
+//    fun updateMovie(
+//        id: Long,
+//        title: String,
+//        genre: String,
+//        rating: String,
+//        runtime: Int,
+//        format: String,
+//        notes: String
+//    ) {
+//        val updatedMovie = Movie(
+//            id = id,
+//            title = title,
+//            genre = genre,
+//            rating = rating,
+//            runtime = runtime,
+//            format = format,
+//            notes = notes
+//        )
+//
+//        _Movies.value = _Movies.value.map { movie ->
+//            if (movie.id == id) {
+//                updatedMovie
+//            } else {
+//                movie
+//            }
+//        }
+//    }
 }

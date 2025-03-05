@@ -1,15 +1,21 @@
 package com.example.assignment3.repositories
 
+import com.example.assignment3.daos.VideoGamesDao
 import com.example.assignment3.models.VideoGame
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-object VideoGamesRepository {
-    var videoGameId = 0
+class VideoGamesRepository(
+    private val videoGamesDao: VideoGamesDao
+) {
     private val _VideoGames = MutableStateFlow(emptyList<VideoGame>())
     val VideoGames: StateFlow<List<VideoGame>> = _VideoGames
 
-    fun addVideoGame(
+    suspend fun getAllVideoGames() {
+        _VideoGames.value = videoGamesDao.getAllVideoGames()
+    }
+
+    suspend fun addVideoGame(
         title: String,
         developer: String,
         genre: String,
@@ -18,8 +24,6 @@ object VideoGamesRepository {
         notes: String
     ) {
         val newVideoGame = VideoGame(
-
-            id = ++videoGameId,
             title = title,
             developer = developer,
             genre = genre,
@@ -27,35 +31,35 @@ object VideoGamesRepository {
             platform = platform,
             notes = notes
         )
-
+        newVideoGame.id = videoGamesDao.insertVideoGame(newVideoGame)
         _VideoGames.value += newVideoGame
     }
 
-    fun updateVideoGame(
-        id: Long,
-        title: String,
-        developer: String,
-        genre: String,
-        rating: String,
-        platform: String,
-        notes: String
-    ) {
-        val updatedVideoGame = VideoGame(
-            id = id,
-            title = title,
-            developer = developer,
-            genre = genre,
-            rating = rating,
-            platform = platform,
-            notes = notes
-        )
-
-        _VideoGames.value = _VideoGames.value.map { videoGame ->
-            if (videoGame.id == id) {
-                updatedVideoGame
-            } else {
-                videoGame
-            }
-        }
-    }
+//    fun updateVideoGame(
+//        id: Long,
+//        title: String,
+//        developer: String,
+//        genre: String,
+//        rating: String,
+//        platform: String,
+//        notes: String
+//    ) {
+//        val updatedVideoGame = VideoGame(
+//            id = id,
+//            title = title,
+//            developer = developer,
+//            genre = genre,
+//            rating = rating,
+//            platform = platform,
+//            notes = notes
+//        )
+//
+//        _VideoGames.value = _VideoGames.value.map { videoGame ->
+//            if (videoGame.id == id) {
+//                updatedVideoGame
+//            } else {
+//                videoGame
+//            }
+//        }
+//    }
 }

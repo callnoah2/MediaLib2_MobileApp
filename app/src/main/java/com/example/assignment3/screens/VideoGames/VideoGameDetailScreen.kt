@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import com.example.assignment3.viewModels.VideoGameViewModel
 
 @Composable
-fun VideoGameDetailScreen(navController: NavController, videoGameId: Int, viewModel: VideoGameViewModel = viewModel()) {
+fun VideoGameDetailScreen(navController: NavController, videoGameId: Long, viewModel: VideoGameViewModel = viewModel()) {
     val game = viewModel.getVideoGameById(videoGameId)
     Box(
         modifier = Modifier

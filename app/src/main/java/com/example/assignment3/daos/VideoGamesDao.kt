@@ -15,7 +15,7 @@ abstract class VideoGamesDao {
     abstract suspend fun insertVideoGame(videoGame: VideoGame): Long
 
     @Query("SELECT * FROM VideoGame WHERE id = :id")
-    abstract suspend fun getVideoGameById(id: Int): VideoGame?
+    abstract suspend fun getVideoGameById(id: Long): VideoGame?
 
     @Update
     abstract suspend fun updateVideoGame(videoGame: VideoGame)

@@ -16,7 +16,7 @@ abstract class BooksDao {
     abstract suspend fun insertBook(book: Book): Long
 
     @Query("SELECT * FROM Book WHERE id = :id")
-    abstract suspend fun getBookById(id: Int): Book?
+    abstract suspend fun getBookById(id: Long): Book?
 
     @Update
     abstract suspend fun updateBook(book: Book)

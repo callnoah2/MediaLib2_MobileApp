@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 import com.example.assignment3.viewModels.MovieViewModel
 
 @Composable
-fun MovieDetailScreen(navController: NavController, movieId: Int, viewModel: MovieViewModel = viewModel()) {
+fun MovieDetailScreen(navController: NavController, movieId: Long, viewModel: MovieViewModel = viewModel()) {
     val movie = viewModel.getMovieById(movieId)
     Box(
         modifier = Modifier

@@ -15,7 +15,7 @@ abstract class MoviesDao {
     abstract suspend fun insertMovie(movie: Movie): Long
 
     @Query("SELECT * FROM Movie WHERE id = :id")
-    abstract suspend fun getMovieById(id: Int): Movie?
+    abstract suspend fun getMovieById(id: Long): Movie?
 
     @Update
     abstract suspend fun updateMovie(movie: Movie)

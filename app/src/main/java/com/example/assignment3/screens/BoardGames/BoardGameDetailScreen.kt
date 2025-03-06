@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import com.example.assignment3.viewModels.BoardGameViewModel
 
 @Composable
-fun BoardGameDetailScreen(navController: NavController, boardGameId: Int, viewModel: BoardGameViewModel = viewModel()) {
+fun BoardGameDetailScreen(navController: NavController, boardGameId: Long, viewModel: BoardGameViewModel = viewModel()) {
     val game = viewModel.getBoardGameById(boardGameId)
     Box(
         modifier = Modifier

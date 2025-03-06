@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import com.example.assignment3.viewModels.BookViewModel
 
 @Composable
-fun BookDetailScreen(navController: NavController, bookId: Int, viewModel: BookViewModel = viewModel()) {
+fun BookDetailScreen(navController: NavController, bookId: Long, viewModel: BookViewModel = viewModel()) {
     val book = viewModel.getBookById(bookId)
     Box(
         modifier = Modifier

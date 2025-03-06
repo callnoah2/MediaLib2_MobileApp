@@ -4,20 +4,25 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.room.Room
+import com.example.assignment3.AppDataBase
 import com.example.assignment3.models.Movie
 import com.example.assignment3.repositories.MoviesRepository
 import com.example.assignment3.viewModels.MainViewModel
 import com.example.assignment3.viewModels.MovieViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun CreateMovieScreen(
     navController: NavController,
-    viewModel: MovieViewModel = viewModel(),
+//    viewModel: MovieViewModel = viewModel(),
     mainViewModel: MainViewModel = MainViewModel(),
-    repository: MoviesRepository = MoviesRepository
+//    repository: MoviesRepository = MoviesRepository
 ){
     var title by remember { mutableStateOf("") }
     var genre by remember { mutableStateOf("") }
@@ -25,7 +30,12 @@ fun CreateMovieScreen(
     var runtime by remember { mutableStateOf("") }
     var format by remember { mutableStateOf("") }
     var notes by remember { mutableStateOf("") }
-
+    val scope = rememberCoroutineScope()
+    val db = Room.databaseBuilder(
+        LocalContext.current,
+        AppDataBase::class.java,
+        "media_library"
+    ).build()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -74,19 +84,28 @@ fun CreateMovieScreen(
         )
         Button(
             onClick = {
-                if (title.isNotEmpty()) {
-                    val newMovie = Movie(
-                        id = viewModel.getNextId(),
-                        title = title,
-                        genre = genre,
-                        rating = rating,
-                        runtime = runtime.toIntOrNull() ?: 0,
-                        format = format,
-                        notes = notes
-                    )
-                    repository.addMovie(newMovie.title, newMovie.genre, newMovie.rating, newMovie.runtime, newMovie.format, newMovie.notes)
-                    mainViewModel.incrementMovieCount()
-                    navController.popBackStack()
+                scope.launch(Dispatchers.IO) {
+                    if (title.isNotEmpty()) {
+                        val newMovie = Movie(
+                            title = title,
+                            genre = genre,
+                            rating = rating,
+                            runtime = runtime.toIntOrNull() ?: 0,
+                            format = format,
+                            notes = notes
+                        )
+                        db.moviesDao.insertMovie(newMovie)
+//                        repository.addMovie(
+//                            newMovie.title,
+//                            newMovie.genre,
+//                            newMovie.rating,
+//                            newMovie.runtime,
+//                            newMovie.format,
+//                            newMovie.notes
+//                        )
+                        mainViewModel.incrementMovieCount()
+                        navController.popBackStack()
+                    }
                 }
             },
             modifier = Modifier.fillMaxWidth().padding(top = 16.dp)

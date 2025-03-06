@@ -33,6 +33,10 @@ class BoardGamesRepository(
         _BoardGames.value += newBoardGame
     }
 
+    suspend fun getBoardGameById(id: Int): BoardGame? {
+        return boardGamesDao.getBoardGameById(id)
+    }
+
 //    suspend fun updateBoardGame(
 //        id: Long,
 //        title: String,

@@ -11,8 +11,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f4956754-4229-4071-9864-c4d7baf2396c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/MediaLibApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/MediaLibApplication.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/screens/BoardGames/CreateBoardGameScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/screens/BoardGames/CreateBoardGameScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/daos/BoardGamesDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/daos/BoardGamesDao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/repositories/BoardGamesRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/repositories/BoardGamesRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/screens/Books/CreateBookScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/screens/Books/CreateBookScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/screens/Movies/CreateMovieScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/screens/Movies/CreateMovieScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/screens/VideoGames/CreateVideoGameScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/screens/VideoGames/CreateVideoGameScreen.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/viewModels/BoardGameViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment3/viewModels/BoardGameViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

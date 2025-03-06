@@ -15,6 +15,8 @@ abstract class BoardGamesDao {
     @Insert
     abstract suspend fun insertBoardGame(game: BoardGame): Long
 
+    abstract suspend fun getBoardGameById(id: Int): BoardGame?
+
     @Update
     abstract suspend fun updateBoardGame()
 }

@@ -32,7 +32,4 @@ class BoardGameViewModel(
         return _boardGames.value.find { it.id == id }
     }
 
-    fun getNextId(): Int {
-        return _boardGames.value.maxOfOrNull { it.id }?.plus(1) ?: 0
-    }
 }

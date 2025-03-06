@@ -4,19 +4,24 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.room.Room
+import com.example.assignment3.AppDataBase
 import com.example.assignment3.models.Book
 import com.example.assignment3.repositories.BooksRepository
 import com.example.assignment3.viewModels.BookViewModel
 import com.example.assignment3.viewModels.MainViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun CreateBookScreen(
     navController: NavController,
-    viewModel: BookViewModel = BookViewModel(),
+//    viewModel: BookViewModel = BookViewModel(),
     mainViewModel: MainViewModel = MainViewModel(),
-    repository: BooksRepository = BooksRepository
+//    repository: BooksRepository = BooksRepository
 ){
     var title by remember { mutableStateOf("") }
     var author by remember { mutableStateOf("") }
@@ -24,6 +29,12 @@ fun CreateBookScreen(
     var numPages by remember { mutableStateOf(0) }
     var genre by remember { mutableStateOf("") }
     var notes by remember { mutableStateOf("") }
+    val scope = rememberCoroutineScope()
+    val db = Room.databaseBuilder(
+        LocalContext.current,
+        AppDataBase::class.java,
+        "media_library"
+    ).build()
 
     Column(modifier = Modifier
         .fillMaxSize().
@@ -78,19 +89,28 @@ fun CreateBookScreen(
 
         Button(
             onClick = {
-                if (title.isNotEmpty()) {
-                    val newBook = Book(
-                        id = viewModel.getNextId(),
-                        title = title,
-                        author = author,
-                        format = format,
-                        numPages = numPages,
-                        genre = genre,
-                        notes = notes
-                    )
-                    repository.addBook(newBook.title, newBook.author, newBook.format, newBook.numPages, newBook.genre, newBook.notes)
-                    mainViewModel.incrementBookCount()
-                    navController.popBackStack()
+                scope.launch(Dispatchers.IO) {
+                    if (title.isNotEmpty()) {
+                        val newBook = Book(
+                            title = title,
+                            author = author,
+                            format = format,
+                            numPages = numPages,
+                            genre = genre,
+                            notes = notes
+                        )
+                        db.booksDao.insertBook(newBook)
+//                        repository.addBook(
+//                            newBook.title,
+//                            newBook.author,
+//                            newBook.format,
+//                            newBook.numPages,
+//                            newBook.genre,
+//                            newBook.notes
+//                        )
+                        mainViewModel.incrementBookCount()
+                        navController.popBackStack()
+                    }
                 }
             },
             modifier = Modifier.fillMaxWidth().padding(top = 16.dp)

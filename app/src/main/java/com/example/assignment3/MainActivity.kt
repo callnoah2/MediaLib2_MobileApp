@@ -49,10 +49,14 @@ class MainActivity : ComponentActivity() {
                             // HOME
                             composable("home") {
                                 HomeScreen(
-                                    movieCount = MoviesRepository.movieId,
-                                    bookCount = BooksRepository.bookId,
-                                    gameCount = VideoGamesRepository.videoGameId,
-                                    boardGameCount = BoardGamesRepository.boardGameId,
+//                                    movieCount = MoviesRepository.movieId,
+//                                    bookCount = BooksRepository.bookId,
+//                                    gameCount = VideoGamesRepository.videoGameId,
+//                                    boardGameCount = BoardGamesRepository.boardGameId,
+                                    movieCount = 0,
+                                    bookCount = 0,
+                                    gameCount = 0,
+                                    boardGameCount = 0,
                                     navController = navController
                                 )
                             }

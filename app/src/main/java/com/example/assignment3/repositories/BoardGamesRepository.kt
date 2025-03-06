@@ -33,7 +33,7 @@ class BoardGamesRepository(
         _BoardGames.value += newBoardGame
     }
 
-    suspend fun getBoardGameById(id: Int): BoardGame? {
+    suspend fun getBoardGameById(id: Long): BoardGame? {
         return boardGamesDao.getBoardGameById(id)
     }
 

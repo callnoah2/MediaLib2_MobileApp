@@ -19,6 +19,12 @@ class BoardGameViewModel(
             BoardGamesRepository.getAllBoardGames()
         }
     }
+    
+    fun getBoardGameById(id: Long): BoardGame? {
+        viewModelScope.launch {
+            BoardGamesRepository.getBoardGameById(id)
+        }
+    }
 
     init {
         viewModelScope.launch {
@@ -27,9 +33,9 @@ class BoardGameViewModel(
             }
         }
     }
-
-    fun getBoardGameById(id: Int): BoardGame? {
-        return _boardGames.value.find { it.id == id }
-    }
+//
+//    fun getBoardGameById(id: Int): BoardGame? {
+//        return _boardGames.value.find { it.id == id }
+//    }
 
 }

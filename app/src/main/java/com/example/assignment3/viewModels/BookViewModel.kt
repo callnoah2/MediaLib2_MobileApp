@@ -8,9 +8,23 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class BookViewModel : ViewModel() {
+class BookViewModel(
+    private val BooksRepository: BooksRepository
+) : ViewModel() {
     private val _books = MutableStateFlow(emptyList<Book>())
     val books: StateFlow<List<Book>> = _books
+
+    fun getAllBooks() {
+        viewModelScope.launch {
+            BooksRepository.getAllBooks()
+        }
+    }
+
+    fun getBookById(id: Long): Book? {
+        viewModelScope.launch {
+            BooksRepository.getBookById(id)
+        }
+    }
 
     init {
         viewModelScope.launch {
@@ -20,11 +34,4 @@ class BookViewModel : ViewModel() {
         }
     }
 
-    fun getBookById(id: Int): Book? {
-        return _books.value.find { it.id == id }
-    }
-
-    fun getNextId(): Int {
-        return _books.value.maxOfOrNull { it.id }?.plus(1) ?: 0
-    }
 }

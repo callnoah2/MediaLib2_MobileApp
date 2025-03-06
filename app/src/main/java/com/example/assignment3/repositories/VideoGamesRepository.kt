@@ -35,6 +35,10 @@ class VideoGamesRepository(
         _VideoGames.value += newVideoGame
     }
 
+    suspend fun getVideoGameById(id: Long): VideoGame? {
+        return videoGamesDao.getVideoGameById(id)
+    }
+
 //    fun updateVideoGame(
 //        id: Long,
 //        title: String,

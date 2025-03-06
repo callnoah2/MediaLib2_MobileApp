@@ -8,9 +8,23 @@ import kotlinx.coroutines.launch
 import com.example.assignment3.models.VideoGame
 import com.example.assignment3.repositories.VideoGamesRepository
 
-class VideoGameViewModel : ViewModel() {
+class VideoGameViewModel(
+    private val VideoGamesRepository: VideoGamesRepository
+) : ViewModel() {
     private val _videoGames = MutableStateFlow(emptyList<VideoGame>())
     val videoGames: StateFlow<List<VideoGame>> = _videoGames
+
+    fun getAllVideoGames() {
+        viewModelScope.launch {
+            VideoGamesRepository.getAllVideoGames()
+        }
+    }
+
+    fun getVideoGameById(id: Long): VideoGame? {
+        viewModelScope.launch {
+            VideoGamesRepository.getVideoGameById(id)
+        }
+    }
 
     init {
         viewModelScope.launch {
@@ -20,11 +34,4 @@ class VideoGameViewModel : ViewModel() {
         }
     }
 
-    fun getVideoGameById(id: Int): VideoGame? {
-        return _videoGames.value.find { it.id == id }
-    }
-
-    fun getNextId(): Int {
-        return _videoGames.value.maxOfOrNull { it.id }?.plus(1) ?: 0
-    }
 }

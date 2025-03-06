@@ -8,9 +8,23 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class MovieViewModel : ViewModel() {
+class MovieViewModel(
+    private val MoviesRepository: MoviesRepository
+) : ViewModel() {
     private val _movies = MutableStateFlow(emptyList<Movie>())
     val movies: StateFlow<List<Movie>> = _movies
+
+    fun getAllMovies() {
+        viewModelScope.launch {
+            MoviesRepository.getAllMovies()
+        }
+    }
+
+    fun getMovieById(id: Long): Movie? {
+        viewModelScope.launch {
+            MoviesRepository.getMovieById(id)
+        }
+    }
 
     init {
         viewModelScope.launch {
@@ -20,11 +34,5 @@ class MovieViewModel : ViewModel() {
         }
     }
 
-    fun getMovieById(id: Int): Movie? {
-        return _movies.value.find { it.id == id }
-    }
 
-    fun getNextId(): Int {
-        return _movies.value.maxOfOrNull { it.id }?.plus(1) ?: 0
-    }
 }

@@ -35,6 +35,10 @@ class MoviesRepository(
         _Movies.value += newMovie
     }
 
+    suspend fun getMovieById(id: Long): Movie? {
+        return moviesDao.getMovieById(id)
+    }
+
 //    fun updateMovie(
 //        id: Long,
 //        title: String,

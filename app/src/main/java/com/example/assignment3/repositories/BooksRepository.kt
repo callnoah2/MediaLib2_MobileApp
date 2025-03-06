@@ -34,6 +34,10 @@ class BooksRepository(
         newBook.id = booksDao.insertBook(newBook)
         _Book.value += newBook
     }
+
+    suspend fun getBookById(id: Long): Book? {
+        return booksDao.getBookById(id)
+    }
 //    fun updateBook(
 //        id: Long,
 //        title: String,

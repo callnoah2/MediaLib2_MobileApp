@@ -13,7 +13,12 @@ import com.example.assignment3.viewModels.BookViewModel
 
 @Composable
 fun BookDetailScreen(navController: NavController, bookId: Long, viewModel: BookViewModel = viewModel()) {
-    val book = viewModel.getBookById(bookId)
+    val book by viewModel.book.collectAsState()
+
+    LaunchedEffect(bookId) {
+        viewModel.fetchBookById(bookId)
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -28,12 +33,12 @@ fun BookDetailScreen(navController: NavController, bookId: Long, viewModel: Book
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 if (book != null) {
-                    Text(text = book.title, style = MaterialTheme.typography.headlineLarge, modifier = Modifier.padding(bottom = 8.dp))
-                    Text(text = "Author: ${book.author}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
-                    Text(text = "Format: ${book.format}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
-                    Text(text = "Pages: ${book.numPages}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
-                    Text(text = "Genre: ${book.genre}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
-                    Text(text = "Notes: ${book.notes}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
+                    Text(text = book!!.title, style = MaterialTheme.typography.headlineLarge, modifier = Modifier.padding(bottom = 8.dp))
+                    Text(text = "Author: ${book!!.author}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
+                    Text(text = "Format: ${book!!.format}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
+                    Text(text = "Pages: ${book!!.numPages}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
+                    Text(text = "Genre: ${book!!.genre}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
+                    Text(text = "Notes: ${book!!.notes}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
                 } else {
                     Text(text = "Game not found", style = MaterialTheme.typography.headlineLarge, modifier = Modifier.padding(bottom = 8.dp))
                 }

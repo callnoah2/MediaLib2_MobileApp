@@ -13,7 +13,12 @@ import com.example.assignment3.viewModels.BoardGameViewModel
 
 @Composable
 fun BoardGameDetailScreen(navController: NavController, boardGameId: Long, viewModel: BoardGameViewModel = viewModel()) {
-    val game = viewModel.getBoardGameById(boardGameId)
+    val game by viewModel.boardGame.collectAsState()
+
+    LaunchedEffect(boardGameId) {
+        viewModel.fetchBoardGameById(boardGameId)
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -28,10 +33,10 @@ fun BoardGameDetailScreen(navController: NavController, boardGameId: Long, viewM
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 if (game != null) {
-                    Text(text = game.title, style = MaterialTheme.typography.headlineLarge, modifier = Modifier.padding(bottom = 8.dp))
-                    Text(text = "Players: ${game.minPlayers} - ${game.maxPlayers}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
-                    Text(text = "Category: ${game.type}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
-                    Text(text = "Notes: ${game.notes}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
+                    Text(text = game!!.title, style = MaterialTheme.typography.headlineLarge, modifier = Modifier.padding(bottom = 8.dp))
+                    Text(text = "Players: ${game!!.minPlayers} - ${game!!.maxPlayers}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
+                    Text(text = "Category: ${game!!.type}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
+                    Text(text = "Notes: ${game!!.notes}", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(bottom = 8.dp))
                 } else {
                     Text(text = "Game not found", style = MaterialTheme.typography.headlineLarge, modifier = Modifier.padding(bottom = 8.dp))
                 }

@@ -13,7 +13,12 @@ import com.example.assignment3.viewModels.VideoGameViewModel
 
 @Composable
 fun VideoGameDetailScreen(navController: NavController, videoGameId: Long, viewModel: VideoGameViewModel = viewModel()) {
-    val game = viewModel.getVideoGameById(videoGameId)
+    val game by viewModel.videoGame.collectAsState()
+
+    LaunchedEffect(videoGameId) {
+        viewModel.fetchVideoGameById(videoGameId)
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -29,25 +34,25 @@ fun VideoGameDetailScreen(navController: NavController, videoGameId: Long, viewM
             Column(modifier = Modifier.padding(16.dp)) {
                 if (game != null) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text(text = game.title, style = MaterialTheme.typography.headlineLarge)
+                        Text(text = game!!.title, style = MaterialTheme.typography.headlineLarge)
                         Text(
-                            text = "Developer: ${game.developer}",
+                            text = "Developer: ${game!!.developer}",
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Text(
-                            text = "Genre: ${game.genre}",
+                            text = "Genre: ${game!!.genre}",
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Text(
-                            text = "Rating: ${game.rating}",
+                            text = "Rating: ${game!!.rating}",
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Text(
-                            text = "Platform: ${game.platform} minutes",
+                            text = "Platform: ${game!!.platform} minutes",
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Text(
-                            text = "Notes: ${game.notes}",
+                            text = "Notes: ${game!!.notes}",
                             style = MaterialTheme.typography.bodyLarge
                         )
                     }

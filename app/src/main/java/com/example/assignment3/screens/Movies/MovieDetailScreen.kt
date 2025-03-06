@@ -17,7 +17,12 @@ import com.example.assignment3.viewModels.MovieViewModel
 
 @Composable
 fun MovieDetailScreen(navController: NavController, movieId: Long, viewModel: MovieViewModel = viewModel()) {
-    val movie = viewModel.getMovieById(movieId)
+    val movie by viewModel.movie.collectAsState()
+
+    LaunchedEffect(movieId) {
+        viewModel.fetchMovieById(movieId)
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -33,25 +38,25 @@ fun MovieDetailScreen(navController: NavController, movieId: Long, viewModel: Mo
             Column(modifier = Modifier.padding(16.dp)) {
                 if (movie != null) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text(text = movie.title, style = MaterialTheme.typography.headlineLarge)
+                        Text(text = movie!!.title, style = MaterialTheme.typography.headlineLarge)
                         Text(
-                            text = "Genre: ${movie.genre}",
+                            text = "Genre: ${movie!!.genre}",
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Text(
-                            text = "Rating: ${movie.rating}",
+                            text = "Rating: ${movie!!.rating}",
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Text(
-                            text = "Runtime: ${movie.runtime} minutes",
+                            text = "Runtime: ${movie!!.runtime} minutes",
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Text(
-                            text = "Format: ${movie.format}",
+                            text = "Format: ${movie!!.format}",
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Text(
-                            text = "Notes: ${movie.notes}",
+                            text = "Notes: ${movie!!.notes}",
                             style = MaterialTheme.typography.bodyLarge
                         )
                     }

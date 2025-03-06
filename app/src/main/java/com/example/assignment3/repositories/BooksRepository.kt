@@ -8,11 +8,14 @@ import kotlinx.coroutines.flow.StateFlow
 class BooksRepository(
     private val booksDao: BooksDao
 ){
-    private val _Book = MutableStateFlow(emptyList<Book>())
-    val Book: StateFlow<List<Book>> = _Book
+    private val _Books = MutableStateFlow(emptyList<Book>())
+    val Books: StateFlow<List<Book>> = _Books
+
+    private val _Book = MutableStateFlow<Book?>(null)
+    val Book: StateFlow<Book?> = _Book
 
     suspend fun getAllBooks() {
-        _Book.value = booksDao.getAllBooks()
+        _Books.value = booksDao.getAllBooks()
     }
 
     suspend fun addBook(
@@ -32,7 +35,7 @@ class BooksRepository(
             notes = notes
         )
         newBook.id = booksDao.insertBook(newBook)
-        _Book.value += newBook
+        _Books.value += newBook
     }
 
     suspend fun getBookById(id: Long): Book? {

@@ -14,21 +14,25 @@ class BookViewModel(
     private val _books = MutableStateFlow(emptyList<Book>())
     val books: StateFlow<List<Book>> = _books
 
+    private val _book = MutableStateFlow<Book?>(null)
+    val book: StateFlow<Book?> = _book
+
+
     fun getAllBooks() {
         viewModelScope.launch {
             BooksRepository.getAllBooks()
         }
     }
 
-    fun getBookById(id: Long): Book? {
+    fun fetchBookById(id: Long) {
         viewModelScope.launch {
-            BooksRepository.getBookById(id)
+            _book.value = BooksRepository.getBookById(id)
         }
     }
 
     init {
         viewModelScope.launch {
-            BooksRepository.Book.collect{
+            BooksRepository.Books.collect{
                 _books.value = it
             }
         }

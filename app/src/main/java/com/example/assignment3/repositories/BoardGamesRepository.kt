@@ -11,6 +11,9 @@ class BoardGamesRepository(
     private val _BoardGames = MutableStateFlow(emptyList<BoardGame>())
     val BoardGames: StateFlow<List<BoardGame>> = _BoardGames
 
+    private val _BoardGame = MutableStateFlow<BoardGame?>(null)
+    val BoardGame: StateFlow<BoardGame?> = _BoardGame
+
     suspend fun getAllBoardGames() {
         _BoardGames.value = boardGamesDao.getAllBoardGames()
     }
@@ -35,33 +38,5 @@ class BoardGamesRepository(
 
     suspend fun getBoardGameById(id: Long): BoardGame? {
         return boardGamesDao.getBoardGameById(id)
-    }
-
-//    suspend fun updateBoardGame(
-//        id: Long,
-//        title: String,
-//        minPlayers: Int,
-//        maxPlayers: Int,
-//        type: String,
-//        notes: String
-//    ) {
-//        val updatedBoardGame = BoardGame(
-//            id = id,
-//            title = title,
-//            minPlayers = minPlayers,
-//            maxPlayers = maxPlayers,
-//            type = type,
-//            notes = notes
-//        )
-//
-//        _BoardGames.value = _BoardGames.value.map { boardGame ->
-//            if (boardGame.id == id) {
-//                updatedBoardGame
-//            } else {
-//                boardGame
-//            }
-//        }
-//    }
-    companion object {
     }
 }

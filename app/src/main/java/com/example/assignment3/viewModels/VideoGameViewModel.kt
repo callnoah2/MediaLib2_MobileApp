@@ -14,15 +14,19 @@ class VideoGameViewModel(
     private val _videoGames = MutableStateFlow(emptyList<VideoGame>())
     val videoGames: StateFlow<List<VideoGame>> = _videoGames
 
+    private val _videoGame = MutableStateFlow<VideoGame?>(null)
+    val videoGame: StateFlow<VideoGame?> = _videoGame
+
+
     fun getAllVideoGames() {
         viewModelScope.launch {
             VideoGamesRepository.getAllVideoGames()
         }
     }
 
-    fun getVideoGameById(id: Long): VideoGame? {
+    fun fetchVideoGameById(id: Long) {
         viewModelScope.launch {
-            VideoGamesRepository.getVideoGameById(id)
+            _videoGame.value = VideoGamesRepository.getVideoGameById(id)
         }
     }
 

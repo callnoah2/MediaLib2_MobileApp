@@ -14,15 +14,18 @@ class MovieViewModel(
     private val _movies = MutableStateFlow(emptyList<Movie>())
     val movies: StateFlow<List<Movie>> = _movies
 
+    private val _movie = MutableStateFlow<Movie?>(null)
+    val movie: StateFlow<Movie?> = _movie
+
     fun getAllMovies() {
         viewModelScope.launch {
             MoviesRepository.getAllMovies()
         }
     }
 
-    fun getMovieById(id: Long): Movie? {
+    fun fetchMovieById(id: Long) {
         viewModelScope.launch {
-            MoviesRepository.getMovieById(id)
+            _movie.value = MoviesRepository.getMovieById(id)
         }
     }
 

@@ -11,6 +11,9 @@ class VideoGamesRepository(
     private val _VideoGames = MutableStateFlow(emptyList<VideoGame>())
     val VideoGames: StateFlow<List<VideoGame>> = _VideoGames
 
+    private val _VideoGame = MutableStateFlow<VideoGame?>(null)
+    val VideoGame: StateFlow<VideoGame?> = _VideoGame
+
     suspend fun getAllVideoGames() {
         _VideoGames.value = videoGamesDao.getAllVideoGames()
     }

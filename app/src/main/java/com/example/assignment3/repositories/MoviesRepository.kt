@@ -11,6 +11,9 @@ class MoviesRepository(
     private val _Movies = MutableStateFlow(emptyList<Movie>())
     val Movies: StateFlow<List<Movie>> = _Movies
 
+    private val _Movie = MutableStateFlow<Movie?>(null)
+    val Movie: StateFlow<Movie?> = _Movie
+
     suspend fun getAllMovies() {
         _Movies.value = moviesDao.getAllMovies()
     }

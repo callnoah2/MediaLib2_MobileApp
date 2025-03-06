@@ -14,15 +14,19 @@ class BoardGameViewModel(
     private val _boardGames = MutableStateFlow(emptyList<BoardGame>())
     val boardGames: StateFlow<List<BoardGame>> = _boardGames
 
+    private val _boardGame = MutableStateFlow<BoardGame?>(null)
+    val boardGame: StateFlow<BoardGame?> = _boardGame
+
+
     fun getAllBoardGames() {
         viewModelScope.launch {
             BoardGamesRepository.getAllBoardGames()
         }
     }
-    
-    fun getBoardGameById(id: Long): BoardGame? {
+
+    fun fetchBoardGameById(id: Long) {
         viewModelScope.launch {
-            BoardGamesRepository.getBoardGameById(id)
+            _boardGame.value = BoardGamesRepository.getBoardGameById(id)
         }
     }
 
